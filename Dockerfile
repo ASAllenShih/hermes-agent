@@ -16,7 +16,7 @@ RUN apt-get update \
  && apt-get update \
  && apt-get install -y --no-install-recommends google-chrome-stable \
  && rm -rf /var/lib/apt/lists/* \
- && python3 -m pip install --no-cache-dir ddgs
+ && /usr/bin/python3 -m pip install --no-cache-dir ddgs
 
 ENV CHROME_BIN=/usr/bin/google-chrome-stable
 
