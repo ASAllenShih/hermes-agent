@@ -1,4 +1,4 @@
-FROM ghcr.io/nousresearch/hermes-agent:latest
+FROM nousresearch/hermes-agent:latest
 
 # Non-interactive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -22,4 +22,4 @@ ENV CHROME_BIN=/usr/bin/chromium
 # Workdir
 WORKDIR /workspace
 
-# Default: keep base image CMD/ENTRYPOINT
+# Keep base image ENTRYPOINT/CMD
