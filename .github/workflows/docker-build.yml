@@ -37,6 +37,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ toLower(github.repository) }}:latest
-            ghcr.io/${{ toLower(github.repository) }}:${{ github.sha }}
+            ghcr.io/asallenshih/hermes-agent:latest
+            ghcr.io/asallenshih/hermes-agent:${{ github.sha }}
           platforms: linux/amd64
