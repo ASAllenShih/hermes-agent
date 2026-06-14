@@ -1,25 +1,25 @@
 FROM nousresearch/hermes-agent:latest
 
-# Non-interactive
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install chromium, python3-pip, and other utilities; install ddgs
+# Install Google Chrome and necessary dependencies, then install ddgs
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		ca-certificates \
-		curl \
-		wget \
-		git \
-		unzip \
-		python3-pip \
-		chromium \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& python3 -m pip install --no-cache-dir ddgs
+ && apt-get install -y --no-install-recommends \
+    ca-certificates curl wget gnupg2 apt-transport-https lsb-release \
+    python3-pip \
+    fonts-liberation libappindicator3-1 libasound2 libatk1.0-0 libatk-bridge2.0-0 \
+    libc6 libdrm2 libgbm1 libgtk-3-0 libnspr4 libnss3 libx11-6 libx11-xcb1 libxcb1 \
+    libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 \
+    libxrender1 libxss1 libxtst6 \
+ && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+ && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends google-chrome-stable \
+ && rm -rf /var/lib/apt/lists/* \
+ && python3 -m pip install --no-cache-dir ddgs
 
-# Set CHROME_BIN for tools that expect it
-ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_BIN=/usr/bin/google-chrome-stable
 
-# Workdir
 WORKDIR /workspace
 
 # Keep base image ENTRYPOINT/CMD
