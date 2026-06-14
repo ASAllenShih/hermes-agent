@@ -20,11 +20,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up QEMU (for cross-platform builds)
-        uses: tonistiigi/binfmt@v1
-        with:
-          install: true
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -35,7 +30,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image (amd64 only)
         uses: docker/build-push-action@v4
         with:
           context: .
